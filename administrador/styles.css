@@ -1,0 +1,273 @@
+        /* --- Paleta de colores CFE --- */
+        :root {
+            --cfe-green: #00774a;
+            /* Un verde más institucional y profundo (cambié de #2e7d32) */
+            --cfe-light-green: #e8f5e9;
+            --cfe-dark-text: #343a40;
+            --cfe-light-text: #6c757d;
+        }
+
+        /* --- Clases de utilidad actualizadas --- */
+        .cfe-bg-green {
+            background-color: var(--cfe-green);
+        }
+
+        .cfe-text-green {
+            color: var(--cfe-green);
+        }
+
+        .cfe-border-green {
+            border: 2px solid var(--cfe-green) !important;
+        }
+
+        /* --- Estilos Globales y Tipografía --- */
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Fuente más limpia */
+            color: var(--cfe-dark-text);
+        }
+
+        .display-5 {
+            font-weight: 700;
+            color: var(--cfe-green);
+            letter-spacing: 0.5px;
+            /* Reduje el espaciado para mejor legibilidad */
+            border-bottom: 3px solid var(--cfe-green);
+            /* Borde más prominente */
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Navbar (Barra de Navegación) --- */
+
+        .navbar {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            /* Sombra más suave y moderna */
+        }
+
+        .logo-cfe-nav {
+            height: 35px;
+            /* Un poco más pequeña, mejor proporción */
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand-centered {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav-link i {
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover i {
+            color: #c8e6c9 !important;
+            /* Efecto hover en los iconos */
+        }
+
+        /* --- Tarjetas (Cards) --- */
+
+        .card {
+            border-radius: 12px;
+            border: 1px solid var(--cfe-light-green);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            /* Sombra más definida */
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            /* Sutil efecto hover para destacar */
+        }
+
+        .card-header {
+            background-color: var(--cfe-green);
+            color: white;
+            font-weight: 600;
+            padding: 0.85rem 1.25rem;
+            font-size: 1.25rem;
+            /* Título de tarjeta más grande */
+            border-radius: 12px 12px 0 0 !important;
+        }
+
+        .list-group-item {
+            padding: 0.75rem 0.5rem;
+            border: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .list-group-item strong {
+            color: var(--cfe-green);
+            font-weight: 700;
+            /* Más énfasis en las etiquetas */
+        }
+
+        /* --- Tabla de Tarifas --- */
+
+        .table th {
+            background-color: var(--cfe-light-green);
+            /* Fondo verde claro consistente */
+            border-bottom: 2px solid var(--cfe-green);
+            font-weight: bold;
+            color: var(--cfe-dark-text);
+            padding: 0.75rem 1.25rem;
+        }
+
+        .table-data td {
+            color: var(--cfe-dark-text);
+            /* Texto de datos más oscuro para mejor lectura */
+            font-size: 1rem;
+            padding: 0.8rem 1.25rem;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f8e9;
+            /* Hover más sutil y temático */
+            cursor: default;
+        }
+
+        .no-scroll-table {
+            overflow-x: hidden;
+            /* Cambié hidden a auto. Si la tabla es muy ancha en móvil, debe poder hacer scroll */
+        }
+
+        /* --- Botón Principal (Siguiente) --- */
+
+        .btn-cfe {
+            background-color: var(--cfe-green) !important;
+            border: none !important;
+            color: white;
+            padding: 0.75rem 2rem;
+            font-size: 1.15rem;
+            font-weight: 600;
+            border-radius: 8px;
+            /* Borde más pequeño para modernizar */
+            box-shadow: 0 4px 10px rgba(0, 119, 74, 0.4);
+            /* Sombra temática del botón */
+            transition: all 0.2s ease;
+            text-decoration: none;
+            /* Asegura que el 'a' se vea como botón */
+            display: inline-block;
+            /* Asegura que el 'a' respete padding/margin */
+        }
+
+        .btn-cfe:hover {
+            background-color: #00935c !important;
+            /* Un verde más claro al pasar el mouse */
+            box-shadow: 0 6px 15px rgba(0, 119, 74, 0.5);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-salir {
+            background-color: red !important;
+            border: none !important;
+            color: white;
+            padding: 0.75rem 2rem;
+            font-size: 1.15rem;
+            font-weight: 600;
+            border-radius: 8px;
+            /* Borde más pequeño para modernizar */
+            box-shadow: 0 4px 10px rgba(0, 119, 74, 0.4);
+            /* Sombra temática del botón */
+            transition: all 0.2s ease;
+            text-decoration: none;
+            /* Asegura que el 'a' se vea como botón */
+            display: inline-block;
+            /* Asegura que el 'a' respete padding/margin */
+        }
+
+        .btn-salir:hover {
+            background-color: #ed2a14fd !important;
+            /* Un verde más claro al pasar el mouse */
+            box-shadow: 0 6px 15px rgba(239, 62, 62, 0.904);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* --- Lectura Actual Box (Encabezado) --- */
+
+        .preview-total-box {
+            padding: 1.5rem !important;
+            /* Más padding para que respire */
+            background-color: var(--cfe-light-green);
+            /* Fondo para destacar */
+            border-left: 5px solid var(--cfe-green);
+            /* Línea lateral de acento */
+        }
+
+        .preview-total-box strong {
+            color: var(--cfe-green);
+            font-size: 1.2rem;
+        }
+
+        .preview-total-box h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0;
+        }
+
+        .preview-total-box p {
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+            color: var(--cfe-light-text);
+        }
+
+        .preview-total-box a {
+            color: var(--cfe-green);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        /* --- Botón/Caja de Estado (Generar Factura) --- */
+
+        .status-box {
+            border: 2px solid var(--cfe-green);
+            padding: 0.45rem 1.2rem;
+            border-radius: 0.5rem;
+            color: var(--cfe-green);
+            font-weight: 600;
+            text-align: center;
+            background-color: var(--cfe-light-green);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            /* Usar flex para centrar mejor contenido e ícono */
+            align-items: center;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .status-box:hover {
+            background-color: var(--cfe-green);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(46, 125, 50, 0.3);
+        }
+
+        /* --- NUEVO: Estilo para estado 'Completado' --- */
+        .status-box.completed {
+            border-color: var(--cfe-completed-border);
+            color: var(--cfe-completed-text);
+            background-color: var(--cfe-completed-bg);
+            cursor: default;
+            box-shadow: none;
+        }
+
+        .status-box.completed:hover {
+            background-color: var(--cfe-completed-bg);
+            /* No cambia al pasar el mouse */
+            color: var(--cfe-completed-text);
+            transform: none;
+            /* No se levanta */
+        }
+
+        /* --- Ajuste para móvil: Apilamiento de columnas --- */
+        @media (max-width: 992px) {
+
+            .col-8,
+            .col-4 {
+                width: 100%;
+            }
+        }
