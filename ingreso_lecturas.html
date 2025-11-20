@@ -24,6 +24,10 @@
         .btn-cfe-dark:hover { background-color: #0e240f; border-color: #0e240f; color: white; }
         .btn-check:checked+.btn-outline-success { background-color: #008f39; color: white; }
         .btn-check:checked+.btn-outline-danger { background-color: #dc3545; color: white; }
+        .btn-no-reporte{
+            color: red;
+            text-decoration: none
+        }
     </style>
 </head>
 
@@ -31,17 +35,17 @@
 
     <nav class="navbar navbar-dark cfe-bg-green px-3">
         <div class="container-fluid position-relative">
-            <a href="dashboard.html" class="navbar-toggler me-2 text-white" style="border: none; text-decoration: none;">
+            <a href="#" class="navbar-toggler me-2 text-white" style="border: none; text-decoration: none;">
                 <i class="bi bi-list fs-1"></i>
             </a>
             <span class="navbar-text text-white d-none d-md-inline">Bienvenido Genaro</span>
             
             <!-- CAMBIO AQUÍ: Nueva imagen del logo -->
-            <a class="navbar-brand navbar-brand-centered" href="dashboard.html">
+            <a class="navbar-brand navbar-brand-centered" href="./botones-lectrurista.html">
                 <img src="cfe-logo-png_seeklogo-28797.png" alt="Logo CFE" class="logo-cfe-nav">
             </a>
             
-            <a href="login.html" class="nav-link text-white text-center ms-auto">
+            <a href="./index.html" class="nav-link text-white text-center ms-auto">
                 <i class="bi bi-box-arrow-right fs-4"></i>
                 <div class="small">Salir</div>
             </a>
@@ -55,7 +59,7 @@
                     <i class="bi bi-list-task fs-4"></i>
                     <span class="d-none d-md-inline ms-1">Ver lista</span>
                 </a>
-                <a href="rutas.html" class="btn btn-outline-success btn-sm border-0">
+                <a href="./rutas-optimas.html" class="btn btn-outline-success btn-sm border-0">
                     <i class="bi bi-signpost-split-fill fs-5"></i>
                     <span class="ms-1 fw-bold">Ver Ruta</span>
                 </a>
@@ -111,8 +115,9 @@
                             <input type="radio" class="btn-check" name="lecturaTomada" id="btnLecturaSi" autocomplete="off" checked>
                             <label class="btn btn-outline-success cfe-border-green" for="btnLecturaSi">SI</label>
 
-                            <input type="radio" class="btn-check" name="lecturaTomada" id="btnLecturaNo" autocomplete="off">
-                            <label class="btn btn-outline-danger cfe-border-green" for="btnLecturaNo">NO</label>
+                                <input type="radio" class="btn-check" name="lecturaTomada" id="btnLecturaNo" autocomplete="off">                               
+                                <a href="./reporte_lec_no.html" class="btn btn-outline-danger cfe-border-green" ><labelfor="btnLecturaNo">NO</label></a>
+                            </div>
                         </div>
                     </div>
 
