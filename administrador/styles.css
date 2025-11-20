@@ -69,7 +69,7 @@
 
         /* --- Tarjetas (Cards) --- */
 
-        .card {
+        .card, .modal {
             border-radius: 12px;
             border: 1px solid var(--cfe-light-green);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -82,14 +82,14 @@
             /* Sutil efecto hover para destacar */
         }
 
-        .card-header {
+        .card-header, .modal-header {
             background-color: var(--cfe-green);
             color: white;
             font-weight: 600;
             padding: 0.85rem 1.25rem;
             font-size: 1.25rem;
             /* Título de tarjeta más grande */
-            border-radius: 12px 12px 0 0 !important;
+            border-radius: 12px !important;
         }
 
         .list-group-item {
@@ -185,6 +185,42 @@
             /* Un verde más claro al pasar el mouse */
             box-shadow: 0 6px 15px rgba(239, 62, 62, 0.904);
             transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-cerrar {
+            background-color: #f0f01e;
+            border: none !important;
+            color: white;
+            padding: 0.75rem 2rem;
+            font-size: 1.15rem;
+            font-weight: 600;
+            border-radius: 8px;
+            /* Borde más pequeño para modernizar */
+            box-shadow: 0 4px 10px rgba(221, 232, 63, 0.4);
+            /* Sombra temática del botón */
+            transition: all 0.2s ease;
+            text-decoration: none;
+            /* Asegura que el 'a' se vea como botón */
+            display: inline-block;
+            /* Asegura que el 'a' respete padding/margin */
+        }
+
+        .btn-cerrar:hover {
+            background-color: #b2bb09;
+            /* Un verde más claro al pasar el mouse */
+            box-shadow: 0 6px 15px rgba(221, 232, 63, 0.4);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-inf{
+            border: none;
+            background-color: white;
+        }
+        .btn-inf-cfe{
+            border: none;
+            background-color: var(--cfe-green);
             color: white;
         }
 

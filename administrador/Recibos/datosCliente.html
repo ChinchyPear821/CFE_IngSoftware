@@ -20,8 +20,7 @@
             </a>
 
             <a class="navbar-brand navbar-brand-centered" href="../main.html">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Logo_de_la_Comisi%C3%B3n_Federal_de_Electricidad_%28CFE%29.svg/1200px-Logo_de_la_Comisi%C3%B3n_Federal_de_Electricidad_%28CFE%29.svg.png"
-                    alt="Logo CFE" class="logo-cfe-nav">
+                <img src="../../images/logoCFE.jpeg" alt="Logo CFE" class="logo-cfe-nav">
             </a>
 
             <a href="../index.html" class="nav-link text-white text-center ms-auto">
@@ -33,7 +32,7 @@
     </nav>
 
     <div class="container-fluid border-bottom py-2 m-3">
-        <h1 class="display-5 text-center">RECIBOS ASIGNADOS</h1>
+        <h1 class="display-5 text-center">DATOS DEL CLIENTE</h1>
     </div>
 
     <div class="container mt-4">
@@ -44,7 +43,7 @@
             <div class="col-6 d-flex align-items-end">
                 <p>
                     Numero de empleado que tomo la lectura:
-                    <a href="../buscarLecturista.html">098765446798</a>
+                    <a href="#">098765446798</a>
                 </p>
             </div>
         </div>
@@ -61,7 +60,14 @@
                                 <li class="list-group-item"><strong>Direccion:</strong></li>
                                 <li class="list-group-item"><strong>No. Servicio:</strong></li>
                                 <li class="list-group-item"><strong>RMU:</strong></li>
-                                <li class="list-group-item"><strong>Region:</strong></li>
+                                <!--Accion que able el modal region-->
+                                <li class="list-group-item">
+                                    <button type="button" class="btn-inf" data-bs-toggle="modal"
+                                        data-bs-target="#modal-region">
+                                        <i class="bi bi-info-circle"></i>
+                                    </button>
+                                    <strong>Region:</strong>
+                                </li>
                                 <li class="list-group-item"><strong>No. Medidor:</strong></li>
                                 <li class="list-group-item"><strong>Multiplicador:</strong></li>
                             </ul>
@@ -82,9 +88,16 @@
                     </div>
                 </section>
 
-                <!--Tarifa-->
+                <!-- Detales Tarifa-->
                 <div class="card">
-                    <h1 class="display-7 card-header">Detalles Tarifa</h1>
+                    <!--Accion que abre modal detalles tarifa-->
+                    <div class="card-header d-flex">
+                        <button type="button" class="btn-inf-cfe" data-bs-toggle="modal"
+                            data-bs-target="#modal-tarifa-domestica">
+                            <i class="bi bi-info-circle"></i>
+                        </button>
+                        <h1 class="display-7">Detalles Tarifa </h1>
+                    </div>
 
                     <div class="table-responsive no-scroll-table">
 
@@ -121,10 +134,16 @@
                 </div>
             </section>
 
-            <!--Datos Tarifa-->
+            <!--Tarifa-->
             <section class="col-4">
                 <div class="card h-70">
-                    <h1 class="display-7 card-header">Tarifa</h1>
+                    <div class="card-header d-flex">
+                        <button type="button" class="btn-inf-cfe" data-bs-toggle="modal" 
+                        data-bs-target="#modal-tarifa">
+                            <i class="bi bi-info-circle"></i>
+                        </button>
+                        <h1 class="display-7">Tarifa </h1>
+                    </div>
 
                     <div class="row card-body">
                         <div class="col-6">
@@ -154,6 +173,60 @@
 
         <div class="mt-4 d-flex justify-content-end gap-2">
             <a href="./calcularConsumo.html" class="btn-cfe">Siguiente</a>
+        </div>
+
+        <!--Modal Region-->
+        <div class="modal fade w-100" id="modal-region" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+
+                    <div class="modal-header m-3">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">¿Qué tarifa aplica en tu zona?</h5>
+                    </div>
+
+                    <div class="modal-body">
+                        <img class="img-fluid" src="../../images/administrador/regionesCFE.png"
+                            alt="Tabla de regiones aplicables">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Modal Tarifa Domestica-->
+        <div class="modal fade w-100" id="modal-tarifa-domestica" tabindex="-1"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+
+                    <div class="modal-header m-3">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Tarifa del hogar</h5>
+                    </div>
+
+                    <div class="modal-body">
+                        <img class="img-fluid" src="../../images/administrador/tarifaDomesticaCFE.png"
+                            alt="Tabla de regiones aplicables">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Modal Tarifa-->
+        <div class="modal fade w-100" id="modal-tarifa" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+
+                    <div class="modal-header m-3">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">¿Qué tipos de Tarifas existen en CFE?</h5>
+                    </div>
+
+                    <div class="modal-body">
+                        <img class="img-fluid" src="../../images/administrador/tarifaCFE.png"
+                            alt="Tabla de regiones aplicables">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
