@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutas Asignadas - CFE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
+    <style>
+        .cfe-bg-green { background-color: #008f39; }
+        .cfe-text-green { color: #008f39; }
+        .cfe-border-green { border: 2px solid #008f39 !important; }
+        
+        /* CAMBIO AQUÍ: Logo más grande */
+        .logo-cfe-nav { height: 80px; width: auto; }
+        
+        .navbar-brand-centered { position: absolute; left: 50%; transform: translateX(-50%); }
+
+        .map-wrapper {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border: 2px solid #6c757d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        #map { width: 100%; height: 100%; z-index: 1; }
+
+        .info-card {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 280px;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .btn-day.active {
+            background-color: #008f39;
+            color: white;
+            border-color: #008f39;
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <nav class="navbar navbar-dark cfe-bg-green px-3">
+        <div class="container-fluid position-relative">
+            <a href="dashboard.html" class="navbar-toggler me-2 text-white" style="border: none; text-decoration: none;">
+                <i class="bi bi-list fs-1"></i>
+            </a>
+            <span class="navbar-text text-white d-none d-md-inline">Bienvenido Genaro</span>
+            
+            <!-- CAMBIO AQUÍ: Nueva imagen del logo -->
+            <a class="navbar-brand navbar-brand-centered" href="dashboard.html">
+                <img src="cfe-logo-png_seeklogo-28797.png" alt="Logo CFE" class="logo-cfe-nav">
+            </a>
+            
+            <a href="login.html" class="nav-link text-white text-center ms-auto">
+                <i class="bi bi-box-arrow-right fs-4"></i>
+                <div class="small">Salir</div>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-4 text-center">
+        <h2 class="text-secondary mb-4">Rutas asignada (Zona FES Acatlán)</h2>
+    </div>
+
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-secondary btn-day" onclick="cargarMapa('Lunes')">Lunes</button>
+                    <button class="btn btn-outline-secondary btn-day" onclick="cargarMapa('Martes')">Martes</button>
+                    <button class="btn btn-outline-secondary btn-day" onclick="cargarMapa('Miércoles')">Miércoles</button>
+                    <button class="btn btn-outline-secondary btn-day" onclick="cargarMapa('Jueves')">Jueves</button>
+                    <button class="btn btn-outline-secondary btn-day" onclick="cargarMapa('Viernes')">Viernes</button>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div id="mensajeInicio" class="alert alert-info text-center">
+                    Selecciona un día para cargar la ruta asignada.
+                </div>
+
+                <div id="contenedorMapa" class="map-wrapper" style="display: none;">
+                    <div id="infoBox" class="card info-card">
+                        <div class="card-header text-white d-flex justify-content-between align-items-center py-1" style="background-color: #008f39;">
+                            <span class="small fw-bold">Detalle del Medidor</span>
+                            <button type="button" class="btn-close btn-close-white btn-sm" onclick="cerrarInfo()"></button>
+                        </div>
+                        <div class="card-body p-2 bg-white">
+                            <p class="mb-1 small"><strong>Servicio:</strong> <span id="infoServicio"></span></p>
+                            <p class="mb-1 small"><strong>Medidor:</strong> <span id="infoMedidor"></span></p>
+                            <p class="mb-1 small"><strong>Dirección:</strong></p>
+                            <p class="mb-2 small text-muted" id="infoDireccion"></p>
+                            <div class="d-grid">
+                                <a href="ingreso_lecturas.html" class="btn btn-sm btn-outline-success cfe-border-green cfe-text-green">Ir a lectura</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script>
+        var map = null;
+        var currentPolyline = null;
+        var markersGroup = null;
+
+        const datosRutas = {
+            'Lunes': {
+                ruta: [[19.47950, -99.25050], [19.48062, -99.24983], [19.48156, -99.24856], [19.48259, -99.24745], [19.48388, -99.24622], [19.48500, -99.24500], [19.48580, -99.24420]],
+                puntos: [
+                    { lat: 19.48062, lng: -99.24983, s: '218484111', m: '598797864', d: 'Av. Alcanfores 20' },
+                    { lat: 19.48156, lng: -99.24856, s: '218484222', m: '598797999', d: 'Av. Alcanfores 45' },
+                    { lat: 19.48259, lng: -99.24745, s: '218484333', m: '598797888', d: 'Av. Alcanfores 102' },
+                    { lat: 19.48388, lng: -99.24622, s: '218484444', m: '598797777', d: 'Av. Alcanfores 150' },
+                    { lat: 19.48500, lng: -99.24500, s: '218484555', m: '598797666', d: 'Av. Alcanfores 200' }
+                ]
+            },
+            'Martes': { ruta: [[19.48500, -99.25500], [19.48600, -99.25400], [19.48700, -99.25300], [19.48800, -99.25200]], puntos: [{ lat: 19.48550, lng: -99.25450, s: '218485001', m: '598798001', d: 'Av. San Mateo 10' }] },
+            'Miércoles': { ruta: [[19.48000, -99.24500], [19.48100, -99.24400], [19.48200, -99.24300], [19.48300, -99.24200]], puntos: [{ lat: 19.48050, lng: -99.24450, s: '218486001', m: '598799001', d: 'C. Colina 5' }] },
+            'Jueves': { ruta: [[19.47800, -99.25200], [19.47900, -99.25100], [19.48000, -99.25000]], puntos: [{ lat: 19.47850, lng: -99.25150, s: '218487001', m: '598796001', d: 'C. Reforma 12' }] },
+            'Viernes': { ruta: [[19.48700, -99.24800], [19.48800, -99.24700], [19.48900, -99.24600]], puntos: [{ lat: 19.48750, lng: -99.24750, s: '218488001', m: '598795001', d: 'C. Morelos 2' }] }
+        };
+
+        function cargarMapa(dia) {
+            document.getElementById('mensajeInicio').style.display = 'none';
+            document.getElementById('contenedorMapa').style.display = 'block';
+            let botones = document.querySelectorAll('.btn-day');
+            botones.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (map === null) {
+                var lat = 19.4825; var lng = -99.2475;
+                map = L.map('map').setView([lat, lng], 15);
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap' }).addTo(map);
+                markersGroup = L.layerGroup().addTo(map);
+            } else { setTimeout(function(){ map.invalidateSize(); }, 100); }
+
+            if (currentPolyline) { map.removeLayer(currentPolyline); }
+            markersGroup.clearLayers();
+            cerrarInfo();
+
+            const datos = datosRutas[dia];
+            if (datos) {
+                currentPolyline = L.polyline(datos.ruta, { color: 'red', weight: 5, opacity: 0.7, dashArray: '10, 10', lineCap: 'round' }).addTo(map);
+                map.fitBounds(currentPolyline.getBounds());
+                var iconoMedidor = L.divIcon({ className: 'custom-div-icon', html: "<div style='background-color:#0d6efd; width:15px; height:15px; border-radius:50%; border:2px solid white; box-shadow:0 0 5px rgba(0,0,0,0.5);'></div>", iconSize: [15, 15], iconAnchor: [7, 7] });
+                datos.puntos.forEach(function(p) {
+                    var marker = L.marker([p.lat, p.lng], {icon: iconoMedidor}).addTo(markersGroup);
+                    marker.on('click', function() { mostrarDetalle(p.s, p.m, p.d); });
+                });
+            }
+        }
+        function mostrarDetalle(s, m, d) { document.getElementById('infoServicio').textContent = s; document.getElementById('infoMedidor').textContent = m; document.getElementById('infoDireccion').textContent = d; document.getElementById('infoBox').style.display = 'block'; }
+        function cerrarInfo() { document.getElementById('infoBox').style.display = 'none'; }
+    </script>
+</body>
+</html>
